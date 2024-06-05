@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Reclamação</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <div class="form-image">
+            <img src="assets/atualizar.png" alt="">
+        </div>
+        <div class="form">
+            <form action="#" id="registerForm">
+                <div class="form-header">
+                    <div class="title">
+                        <h1>Deixe Seu Feedback</h1>
+                    </div>
+                </div>
+                <br>
+                <div class="input-box">
+                    <label for="nome_empresa">Nome Da Empresa</label>
+                    <input id="nome_empresa" type="text" name="nome_empresa" placeholder="Digite o nome da empresa" required>
+                </div>
+
+                <div class="input-box">
+                    <label for="descricao">Descrição da reclamação e feedback</label>
+                    <textarea class="form-control" id="descricaoReclamacao" name="descricao" placeholder="Descreva sua reclamação e feedback..." rows="7" required></textarea>
+                </div>
+
+                <div class="continue-button">
+                    <button type="submit">Enviar reclamação</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+       // Função para obter o ID do usuário do localStorage
+function getUserIdFromLocalStorage() {
+    return localStorage.getItem('user_id');
+}
+
+// Verifica se o ID do usuário está presente no localStorage
+var userId = getUserIdFromLocalStorage();
+console.log("pagina reclamacao: "+ userId)
+
+// Verifica se o ID do usuário está presente
+if (!userId) {
+    alert('Usuário não autenticado.');
+    window.location.href = 'login.html'; // Redireciona para a página de login
+}
+
+// Configura o envio do formulário via AJAX
+$('#registerForm').on('submit', function(event) {
+    event.preventDefault();
+
+    var formData = $(this).serializeArray();
+    formData.push({ name: 'usuario_id', value: userId });
+
+    $.ajax({
+        url: 'backend/reclamacao.php',
+        type: 'POST',
+        data: $.param(formData),
+        dataType: 'json',
+        success: function(data) {
+            if (data.hasOwnProperty('success')) {
+                alert('Reclamação enviada com sucesso!');
+                window.location.href = 'index.html';
+            } else if (data.hasOwnProperty('error')) {
+                alert('Erro: ' + data.error);
+            } else {
+                alert('Erro desconhecido ao enviar a reclamação.');
+            }
+        },
+        error: function(xhr, status, error) {
+            console.error('Erro:', error);
+            alert('Erro ao enviar a reclamação.');
+        }
+    });
+});
+
+    </script>
+</body>
+</html>

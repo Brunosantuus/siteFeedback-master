@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Ouvidoria</title>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="footer.css">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.rtl.min.css" integrity="sha384-dpuaG1suU0eT09tx5plTaGMLBsfDLzUCCUXOY2j/LSvXYuG6Bqs43ALlhIqAJVRb" crossorigin="anonymous">
+    <style>
+        /* Estilo para ajustar a altura das imagens */
+        .carousel-item img {
+            max-height: 600px; /* Defina a altura desejada */
+            width: 100%; /* Largura total da tela */
+            margin: 0 auto; /* Centraliza a imagem horizontalmente */
+        }
+        
+        /* Estilo para as linhas finas e transparentes */
+        .separator {
+            border-top: 1px solid rgba(0, 0, 0, 0.1);
+            margin: 30px 0;
+        }
+
+        /* Estilo para ajustar a largura do carrossel */
+        #carouselExampleIndicators {
+            width: 100%; /* Largura total da tela */
+            overflow: hidden; /* Oculta qualquer conteúdo extra que ultrapasse a largura definida */
+        }
+
+        /* Estilo para centralizar os elementos do formulário */
+        #form-container {
+            display: none;
+            margin: 0 auto;
+            max-width: 600px; /* Defina a largura máxima desejada para o formulário */
+            border-radius: 15px; /* Cantos arredondados */
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Sombra */
+            margin-bottom: 30px; /* Margem inferior */
+        }
+        .form-label {
+            text-align: left !important;
+        }
+
+        /* Estilo para ocultar o botão de início quando o formulário é exibido */
+        .zero-point {
+            display: none;
+        }
+
+
+        /* Estilo para centralizar o carregamento */
+        .loading {
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        /* Estilo para a barra de progresso */
+        .progress-stacked {
+            margin-top: 20px;
+        }
+
+        /* Estilo para centralizar botões de continuar */
+        .step button {
+            margin: 0 auto;
+            display: block;
+        }
+
+        /* Estilo para as linhas finas e transparentes */
+        .separator {
+            border-top: 1px solid rgba(0, 0, 0, 0.1);
+            margin: 30px 0;
+        }
+
+        /* Estilo para os cards */
+        .card {
+            margin-bottom: 20px; /* Margem inferior */
+        }
+
+        /* Estilo para a visualização das imagens anexadas */
+        #preview img {
+          max-width: 100px; /* Defina o tamanho máximo da imagem */
+          margin-right: 20px; /* Adicione um espaçamento entre as imagens */
+        }
+
+        /* Estilo para animação do botão */
+        .pulse {
+            animation: pulse 1.5s infinite;
+        }
+
+        .forms {
+          text-align: left;
+          margin-left: 10px;
+        }
+        
+        .left-align {
+        text-align: left !important;
+        }
+
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+    </style>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+
+</head>
+
+<body>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-9C/PcDV3pM9B5Sy3kFYZrNsxgYGl1eKcSL4qz2cbvutlOUm5RQ3vnjMT29xS27yN" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-MlK2S3m2X6b5VlJ8m6awjpRYZ1Lhxl4otYoslpUBT6T4s0CJsS8z9ZzKbN5axj4d" crossorigin="anonymous"></script>
+
+     <!-- Navbar -->
+     <!-- Navbar -->
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">
+            <img src="assets/logo, Ouvidoria.png" alt="Ícone" width="50" height="50" class="d-inline-block align-top me-2">
+            <a>&nbsp;OUVIDORIA</a>
+        </a>
+    
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNavDropdown">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="index.html">Página principal</a>
+                    </li>
+            
+                    <li class="nav-item dropdown" id="login-dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Menu
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li id="login-registro"><a class="dropdown-item" href="index.html">Voltar</a></li>
+                           
+                        </ul>
+                    </li>
+                    
+                </ul>
+            </div>
+        </div>
+    </nav>
+<br>
+ <!-- Linha separadora -->
+ <div class="separator"></div>
+<br>
+    <div class="container text-center">
+        <!-- Conteúdo principal -->
+    <div class="container text-center">
+        <div class="col"> <!-- Adicionado div class="col" -->
+        <h3>Suas reclamações</h3>
+        <br>
+         <!-- Linha separadora -->
+    <div class="separator"></div>
+ <!-- Barra de pesquisa -->
+<form id="search-form">
+    <div class="input-group mb-3">
+        <input type="text" id="search-input" class="form-control" placeholder="Digite o nome da empresa">
+        <button class="btn btn-outline-secondary" type="button" id="search-button">
+            <i class="bi bi-search"></i> <!-- Ícone de lupa -->
+        </button>
+    </div>
+</form>
+ <!-- Linha separadora -->
+ <div class="separator"></div>
+
+        <!-- Resultados da pesquisa -->
+        <div id="search-results" class="row">
+            <!-- Os resultados da pesquisa serão exibidos aqui -->
+        </div>
+
+        <div class="row row-cols-1 row-cols-md-2 g-4" id="reclamacoes-container">
+            <!-- Os cards de reclamações serão adicionados aqui dinamicamente -->
+        </div>
+</div>
+
+
+            <br>
+            <h4>Reclamações recentes</h4>
+            <div class="row row-cols-1 row-cols-md-2 g-4">
+                <!-- Card 1 -->
+                
+        </div>
+    </div>
+</body>
+
+</html>
+
+
+
+
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</body>
+</html>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    // Função para buscar as reclamações do usuário logado
+    function buscarReclamacoesUsuario() {
+        // Verificar se há um ID de usuário armazenado no localStorage
+        var userId = localStorage.getItem('user_id');
+        console.log("id usuario" + userId);
+        if (userId) {
+            $.ajax({
+                type: 'GET',
+                url: 'backend/reclamacao.php',
+                data: { usuario_id: userId },
+                success: function(response) {
+                    $('#reclamacoes-container').empty();
+                    if (response.length > 0) {
+                    response.forEach(function(reclamacao) {
+                    // Criar o botão de exclusão e atribuir o ID da reclamação como um atributo de dados
+                    var botaoExcluir = $('<button>').addClass('btn btn-danger').text('Excluir Reclamação').data('id', reclamacao.id);
+
+                    // Adicionar um evento de clique ao botão de exclusão
+                    botaoExcluir.click(function() {
+                        // Capturar o ID da reclamação do atributo de dados do botão
+                        var idReclamacao = $(this).data('id');
+                        excluirReclamacao(idReclamacao); // Passar o ID da reclamação para a função excluirReclamacao
+                    });
+
+                    // Criar o card da reclamação
+                    var card = $('<div>').addClass('col').append(
+                        $('<div>').addClass('card').attr('id', 'card_reclamacao_' + reclamacao.id).append(
+                            $('<div>').addClass('card-body').append(
+                                $('<h5>').addClass('card-title').text(reclamacao.empresa),
+                                $('<p>').addClass('card-text').text(reclamacao.descricao),
+
+                                $('<p>').addClass('card-text').append(
+                            
+                                ),
+                                botaoExcluir // Adicionar o botão de exclusão ao card
+                            )
+                        )
+                    );
+
+                    // Adicionar o card da reclamação ao contêiner de reclamações
+                    $('#reclamacoes-container').append(card);
+                });
+
+                    } else {
+                        $('#reclamacoes-container').append('<p>Nenhuma reclamação encontrada.</p>');
+                    }
+                }
+            });
+        } else {
+            console.log("Nenhum ID de usuário encontrado.");
+        }
+    }
+    // Chamar a função para buscar reclamações ao carregar a página
+    buscarReclamacoesUsuario();
+    
+
+    function excluirReclamacao(reclamacaoId) {
+    if (confirm("Tem certeza de que deseja excluir esta reclamação?")) {
+        $.ajax({
+            type: 'DELETE', // Definindo o método como DELETE
+            url: 'backend/reclamacao.php?reclamacao_id=' + reclamacaoId, // Passando o ID da reclamação na URL
+            success: function(response) {
+                // Após a exclusão bem-sucedida, recarregar a página para atualizar as reclamações
+                location.reload();
+            },
+            error: function(xhr, status, error) {
+                alert("Erro ao excluir a reclamação: " + xhr.responseText);
+            }
+        });
+    }
+}
+</script>
+<footer class="footer">
+    <div class="container">
+        <div class="footer-content">
+            <div class="footer-logo">
+                <img src="assets/logo, Ouvidoria.png" alt="Logo">
+            </div>
+            <div class="footer-links">
+                <ul>
+                    <li><a href="#">Página Principal</a></li>
+                    <li><a href="#">Empresas</a></li>
+                    <li><a href="#">Login</a></li>
+                    <li><a href="mailto:ouvidoria@gmail.com">ouvidoria@gmail.com</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+</body>
+</html>

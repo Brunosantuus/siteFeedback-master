@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Registro Ouvidoria</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <div class="form-image">
+            <img src="assets/Registro.png" alt="">
+        </div>
+        <div class="form">
+            <form id="formRegister_empresa">
+                <div class="form-header">
+                    <div class="title">
+                        <h1>Cadastre-se</h1>
+                    </div>
+                    <div class="login-button">
+                        <button type="button" onclick="window.location.href='login.html'">Voltar</button>
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <div class="input-box">
+                        <label for="nome">Nome </label>
+                        <input id="nome_empresa" type="text" name="nome_empresa" placeholder="Digite o nome da empresa" required>
+                    </div>
+
+                    <div class="input-box">
+                        <label for="cnpj">CNPJ</label>
+                        <input id="cnpj" type="text" name="cnpj" placeholder="Digite seu CNPJ" required>
+                    </div>
+                    <div class="input-box">
+                        <label for="email">E-mail</label>
+                        <input id="email" type="email" name="email" placeholder="Digite seu e-mail" required>
+                    </div>
+
+                    
+
+                    <div class="input-box">
+                        <label for="senha">Senha</label>
+                        <input id="senha" type="password" name="senha" placeholder="Digite sua senha" required>
+                    </div>
+
+                    
+                </div>
+
+                <div class="gender-inputs">
+                    
+
+                    
+                </div>
+
+                <div class="continue-button">
+                    <button type="submit">Confirmar Cadastro</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        $(document).ready(function() {
+            $('#formRegister_empresa').on('submit', function(event) {
+                event.preventDefault();
+    
+                var formData = $(this).serializeArray();
+                formData.push({
+                    name: 'action',
+                    value: 'register_empresa'
+                });
+    
+                $.ajax({
+                    url: 'backend/empresa.php',
+                    type: 'POST',
+                    data: formData, // Não precisa mais serializar novamente
+                    dataType: 'json',
+                    success: function(data) {
+                        if (data.hasOwnProperty('success')) {
+                            alert(data.success);
+                            window.location.href = 'loginempresa.html';
+                        } else if (data.hasOwnProperty('error')) {
+                            alert('Erro: ' + data.error);
+                        } else {
+                            alert('Erro desconhecido ao registrar.');
+                        }
+                    },
+                    error: function(xhr, status, error) {
+                        console.error('Erro:', error);
+                        alert('Erro ao registrar.');
+                    }
+                });
+            });
+        });
+        </script>
+</body>
+
+</html>

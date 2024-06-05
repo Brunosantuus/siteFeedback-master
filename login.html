@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="mainlogin.css">
+    <title>Login Ouvidoria</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <div class="form-image">
+            <img src="assets/lg (1).png" alt="">
+        </div>
+        <div class="form">
+            <form id="formLogin">
+                <div class="form-header">
+                    <div class="title">
+                        <h1>Faça Login!</h1>
+                    </div>
+                    <div class="login-button">
+                        <button><a href="index.html">Voltar</a></button>
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <div class="input-box">
+                        <label for="email">E-mail</label>
+                        <input id="email" type="email" name="email" placeholder="Digite seu e-mail" required>
+                    </div>
+                    <div class="input-box">
+                        <label for="password">Senha</label>
+                        <input id="senha" type="password" name="senha" placeholder="Digite sua senha" required>
+                    </div>
+                </div>
+
+                <div class="continue-button">
+                    <button type="submit">Login</button>
+                </div>
+                <br>
+                <div class="input-box">
+                    <a>Ainda não tem uma conta?</a><a href="registro.html">Registre-se</a>
+                </div>
+            </form>
+        </div>
+    </div>
+    <script>
+        $(document).ready(function() {
+    $('#formLogin').on('submit', function(event) {
+        event.preventDefault();
+
+        var formData = $(this).serializeArray();
+        formData.push({ name: 'action', value: 'login' });
+
+        $.ajax({
+            url: 'backend/cadastrousuario.php',
+            type: 'POST',
+            data: $.param(formData),
+            dataType: 'json',
+            success: function(data) {
+                if (data.hasOwnProperty('user_id')) {
+                    // Armazenar o ID do usuário no localStorage
+                    localStorage.setItem('user_id', data.user_id);
+                    
+                    // Redirecionar para a página de editar perfil
+                    window.location.href = 'index.html';
+                } else if (data.hasOwnProperty('error')) {
+                    alert('Erro: ' + data.error);
+                } else {
+                    alert('Erro desconhecido ao fazer login.');
+                }
+            },
+            error: function(xhr, status, error) {
+                console.error('Erro:', error);
+                alert('Erro ao fazer login.');
+            }
+        });
+    });
+});
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,125 @@
+
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Atualizar perfil</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <div class="form-image">
+            <img src="assets/atualizar.png" alt="">
+        </div>
+        <div class="form">
+            <form action="#" id="updateForm">
+                <div class="form-header">
+                    <div class="title">
+                        <h1>Atualize seu perfil</h1>
+<br>
+                <div class="input-box">
+                    <label for="email">Novo E-mail</label>
+                    <input id="email" type="email" name="email" placeholder="Digite seu e-mail" required>
+                </div>
+
+                <div class="input-box">
+                    <label for="number">Novo Celular</label>
+                    <input id="celular" type="tel" name="celular" placeholder="(xx) xxxx-xxxx" required>
+                </div>
+
+                <div class="input-box">
+                    <label for="newPassword">Nova senha</label>
+                    <input id="newPassword" type="password" name="newPassword" placeholder="Digite sua nova senha">
+                </div>
+
+                <div class="input-box">
+                    <label for="confirmPassword">Confirme sua Senha</label>
+                    <input id="confirmPassword" type="password" name="confirmPassword" placeholder="Digite sua senha novamente" required>
+                </div>
+
+                <div class="continue-button">
+                    <button><a href="index.html">Atualizar Cadastro</a> </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        $(document).ready(function() {
+            var userId = localStorage.getItem('user_id'); // Obter o ID do usuário do localStorage
+
+            if (!userId) {
+                alert('Usuário não autenticado.');
+                //window.location.href = 'login.html';
+            } else {
+                // Requisição AJAX para obter os dados do usuário
+                $.ajax({
+                    url: 'backend/cadastrousuario.php',
+                    type: 'POST',
+                    data: { action: 'getuserdata', user_id: userId },
+                    dataType: 'json',
+                    success: function(data) {
+                        if (data.hasOwnProperty('email') && data.hasOwnProperty('celular')) {
+                            // Preenche os campos do formulário com os dados do usuário
+                            $('#email').val(data.email);
+                            $('#celular').val(data.celular);
+                        } else if (data.hasOwnProperty('error')) {
+                            alert('Erro: ' + data.error);
+                            //window.location.href = 'login.html';
+                        } else {
+                            alert('Erro desconhecido ao carregar dados do usuário.');
+                            //window.location.href = 'login.html';
+                        }
+                    },
+                    error: function(xhr, status, error) {
+                        console.error('Erro:', error);
+                        alert('Erro ao carregar dados do usuário.');
+                        //window.location.href = 'login.html';
+                    }
+                });
+            }
+
+            // Submissão do formulário para atualizar os dados do usuário
+            $('#updateForm').on('submit', function(event) {
+                event.preventDefault();
+                var formData = $(this).serializeArray();
+                formData.push({ name: 'action', value: 'updateuserdata' });
+
+                // Obter o ID do usuário do localStorage
+                var userId = localStorage.getItem('user_id');
+                formData.push({ name: 'user_id', value: userId }); // Adicionar o user_id aos dados do formulário
+                 // Exibir o conteúdo de formData no console
+        	    console.log('FormData:', formData);
+
+                // Requisição AJAX para atualizar os dados do usuário
+                $.ajax({
+                    url: 'backend/cadastrousuario.php',
+                    type: 'POST',
+                    data: $.param(formData),
+                    dataType: 'json',
+                    success: function(data) {
+                        if (data.hasOwnProperty('success')) {
+                            alert('Dados atualizados com sucesso!');
+                            window.location.href = 'login.html';
+                        } else if (data.hasOwnProperty('error')) {
+                            alert('Erro: ' + data.error);
+                        } else {
+                            alert('Erro desconhecido ao atualizar.');
+                        }
+                    },
+                    error: function(xhr, status, error) {
+                        console.error('Erro:', error);
+                        alert('Erro ao atualizar dados.');
+                    }
+                });
+            });
+        });
+    </script>
+    
+</body>
+</html>

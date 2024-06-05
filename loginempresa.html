@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="mainlogin.css">
+    <title>Login Ouvidoria</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <div class="form-image">
+            <img src="assets/lg (1).png" alt="">
+        </div>
+        <div class="form">
+            <form id="formLogin" method="POST" action="backend/empresa.php">
+                <div class="form-header">
+                    <div class="title">
+                        <h1>Faça Login!</h1>
+                    </div>
+                    <div class="login-button">
+                        <button><a href="index.html">Voltar</a></button>
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <div class="input-box">
+                        <label for="email">E-mail</label>
+                        <input id="email" type="email" name="email" placeholder="Digite seu e-mail" required>
+                    </div>
+                    <div class="input-box">
+                        <label for="password">Senha</label>
+                        <input id="senha" type="password" name="senha" placeholder="Digite sua senha" required>
+                    </div>
+                </div>
+
+                <div class="continue-button">
+                    <button type="submit">Login</button>
+                </div>
+                <br>
+                <div class="input-box">
+                    <a>Ainda não tem uma conta?</a><a href="registroempresa.html">Registre-se</a>
+                </div>
+                <input type="hidden" name="action" value="login_empresa">
+            </form>
+        </div>
+    </div>
+    <script>
+        $(document).ready(function () {
+            $('#formLogin').on('submit', function (event) {
+                event.preventDefault();
+
+                var formData = $(this).serialize();
+
+                $.ajax({
+                    url: 'backend/empresa.php', // Verifique o caminho correto do arquivo PHP
+                    type: 'POST',
+                    data: formData,
+                    dataType: 'json',
+                    success: function (data) {
+                        if (data.success) {
+                            
+                            // Login bem-sucedido, redirecionar para a página de login ou fazer qualquer outra ação necessária
+                            alert('Login bem-sucedido!');
+                            window.location.href = 'telaInicialEmpresa.html';
+                        } else {
+                            // Login falhou, exibir mensagem de erro
+                            alert('Login falhou: ' + data.error);
+                        }
+                    },
+                    error: function (xhr, status, error) {
+                        // Erro na requisição AJAX
+                        console.error('Erro:', error);
+                        alert('Erro ao fazer login.');
+                    }
+                });
+            });
+        });
+        
+    </script>
+</body>
+
+</html>
